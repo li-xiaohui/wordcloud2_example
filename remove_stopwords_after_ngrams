@@ -1,0 +1,14 @@
+txt <- "Here: is another stopword."
+mx <- dfm(txt, ngrams = 2)
+
+feat <- featnames(mx)
+feat_split <- stringi::stri_split_fixed(feat, mx@concatenator)
+feat_stop <- feat[sapply(feat_split, function(x) any(x %in% stopwords()))]
+
+dfm_remove(mx, feat_stop)  
+
+# Document-feature matrix of: 1 document, 2 features (0% sparse).
+# 1 x 2 sparse Matrix of class "dfm"
+#      features
+# docs    another_stopword stopword_.
+#  text1                1          1
